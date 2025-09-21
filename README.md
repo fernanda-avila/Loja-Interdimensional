@@ -1,4 +1,4 @@
-# 🚀 Loja Interdimensional - O E-commerce Backend
+#  Loja Interdimensional - O E-commerce Backend
 
 Wubba Lubba Dub Dub, cientistas! Bem-vindos à sua mais nova aventura interdimensional, sancionada pelo próprio Conselho dos Ricks.
 
@@ -8,7 +8,7 @@ Preparem suas Pistolas de Portais, pois é hora de mostrar o que vocês têm!
 
 ---
 
-## ⚙️ Começando: Configurando o Ambiente Front-end
+##  Começando: Configurando o Ambiente Front-end
 
 Para iniciar sua jornada, primeiro você precisa clonar e rodar este projeto front-end. Ele será sua janela para o multiverso (e a interface que consumirá sua API).
 
@@ -44,7 +44,7 @@ Para iniciar sua jornada, primeiro você precisa clonar e rodar este projeto fro
 
 ---
 
-## 🔗 Como Usar e Conectar seu Backend
+##  Como Usar e Conectar seu Backend
 
 Este front-end foi projetado para ser o "Morty" do seu "Rick" (o seu backend). Ele já sabe o que pedir, mas precisa que você diga **para quem** pedir.
 
