@@ -22,8 +22,8 @@ Para iniciar sua jornada, primeiro você precisa clonar e rodar este projeto fro
     Abra seu terminal e clone este projeto para a sua máquina.
 
     ```bash
-    git clone [URL_DO_REPOSITORIO]
-    cd [NOME_DA_Pasta_DO_PROJETO]
+    git clone 'https://github.com/alinetimm/Loja-Interdimensional'
+    cd 'Loja-Interdimensional'
     ```
 
 2.  **Instale as Dependências:**
