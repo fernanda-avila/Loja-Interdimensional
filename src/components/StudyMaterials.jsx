@@ -6,7 +6,7 @@ const StudyMaterials = () => {
     { name: 'Guia Completo da Atividade', file: 'guiacompleto.pdf' },
     { name: 'Fundamentos do Backend - Parte 1', file: 'Fundamentos do Backend  (1).pdf' },
     { name: 'Fundamentos do Backend - Parte 2', file: '_Fundamentos do Backend - Parte 2 (1).pdf' },
-    { name: 'Introdução ao NoSQL com MongoDB', file: 'Introducao-ao-NoSQL-com-MongoDB-Mongoose-e-Express.pdf' },
+    { name: 'Introdução ao NoSQL com MongoDB', file: 'Bancos-de-Dados-NoSQL-Do-Conceito-ao-MongoDB.pdf' },
     { name: 'MongoDB - Operações CRUD', file: 'MongoDB-Fundamentos-Funcionalidades-e-Operacoes-CRUD.pdf' },
     { name: 'Modelagem com Prisma', file: 'Aula 05- Modelagem de dados com Prisma (1).pdf' },
     { name: 'Segurança para Desenvolvedores', file: 'Segurança para desenvolvedores web (John Paul Mueller).pdf' },
