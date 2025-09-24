@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import MongoInstructions from './MongoInstructions';
 import styles from './SpecialProducts.module.css';
@@ -18,58 +18,37 @@ const SpecialProducts = () => {
         { id: 8, name: 'Picles do Rick', img: '/src/assets/picles.webp' }, 
     ];
 
-    const handleAddToCartClick = (product) => {
+    // URL base da API
+    // ...existing code...
+
+    const [cartMessage, setCartMessage] = useState('');
+
+    const API_BASE_URL = 'http://localhost:5000';
+    const handleAddToCartClick = async (product) => {
         setSelectedProduct(product);
         setShowCartModal(true);
+        setCartMessage('');
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`${API_BASE_URL}/cart/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                },
+                body: JSON.stringify({ productId: product.id, quantity: 1 })
+            });
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar ao carrinho');
+            }
+            setCartMessage('Produto adicionado ao carrinho com sucesso!');
+        } catch (err) {
+            setCartMessage('Erro ao adicionar ao carrinho. Faça login ou tente novamente.');
+            console.error(err);
+        }
     };
 
-    return (
-    <>
-        <section id="products">
-            <div className="container">
-                <h2>Produtos Especiais do Multiverso</h2>
-                <p>
-                De Squanch Drops a Plumbus Gummies, nossa seleção inclui os doces mais bizarros e deliciosos de todas as 137 dimensões catalogadas pelo Rick C-137!
-                </p>
-                
-                <div className={styles.productGrid}>
-                    {products.map(product => (
-                        <div key={product.id} className={`card ${styles.productCard}`}>
-                            <div className={styles.cardContent}>
-                                <img src={product.img} alt={product.name} className={styles.productImage} />
-                                <h3>{product.name}</h3>
-                            </div>
-                            <button onClick={() => handleAddToCartClick(product)} className="btn">
-                                Adicionar ao Carrinho
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        <Modal
-            show={showCartModal}
-            onClose={() => setShowCartModal(false)}
-            title={`Guia de Integração: Adicionar ao Carrinho`}
-        >
-            <p>Sua API precisa de uma rota que adicione um produto ao carrinho do usuário logado.</p>
-            <ul>
-                <li><strong>Endpoint:</strong> <code>POST /cart/add</code></li>
-                <li><strong>Autenticação:</strong> Rota protegida. O token JWT deve ser enviado no Header.</li>
-                <li><strong>Corpo da Requisição:</strong> Envie o <code>productId</code> e a <code>quantity</code>.</li>
-            </ul>
-            <MongoInstructions pdfLink="/produtos.pdf">
-                <ul>
-                    <li><strong>1. Conexão:</strong> Obtenha o <code>userId</code> do token e os dados do produto do <code>req.body</code>.</li>
-                    <li><strong>2. Operação no Banco:</strong> Busque o usuário com <code>User.findById(userId)</code>.</li>
-                    <li><strong>3. Lógica:</strong> Verifique se o produto já existe no array <code>cart</code> do usuário. Se sim, atualize a quantidade. Se não, use <code>.push()</code> para adicionar o novo item ao array.</li>
-                    <li><strong>4. Salvar:</strong> Use o método <code>user.save()</code> para persistir as alterações no banco.</li>
-                </ul>
-            </MongoInstructions>
-        </Modal>
-    </>
-    );
+    return null;
 };
 
 export default SpecialProducts;

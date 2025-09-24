@@ -5,9 +5,27 @@ import MongoInstructions from './MongoInstructions';
 const Features = () => {
     const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-    const handleRegisterSubmit = (e) => {
+    const [registerName, setRegisterName] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [registerError, setRegisterError] = useState('');
+    const API_BASE_URL = 'http://localhost:5000';
+
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-        setShowRegisterModal(true);
+        setRegisterError('');
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: registerName, email: registerEmail, password: registerPassword })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao cadastrar');
+            setShowRegisterModal(true);
+        } catch (err) {
+            setRegisterError(err.message);
+        }
     };
 
   return (
@@ -25,10 +43,11 @@ const Features = () => {
                     <li>Perfis personalizados</li>
                     </ul>
                     <form onSubmit={handleRegisterSubmit} style={{marginTop: '20px'}}>
-                        <input type="text" placeholder="Nome" required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
-                        <input type="email" placeholder="Email" required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
-                        <input type="password" placeholder="Senha" required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
+                        <input type="text" placeholder="Nome" value={registerName} onChange={e => setRegisterName(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
+                        <input type="email" placeholder="Email" value={registerEmail} onChange={e => setRegisterEmail(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
+                        <input type="password" placeholder="Senha" value={registerPassword} onChange={e => setRegisterPassword(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
                         <button type="submit" className="btn">Cadastrar</button>
+                        {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
                     </form>
                 </div>
                 <div className="card">
