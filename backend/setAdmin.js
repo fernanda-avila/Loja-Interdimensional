@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Altere para o email do usuário que você quer tornar admin
-const EMAIL = 'avilafernandaa@gmail.com';
+const EMAIL = 'erickramos@gmail.com';
 
 async function setAdmin() {
   await mongoose.connect(process.env.MONGO_URI);

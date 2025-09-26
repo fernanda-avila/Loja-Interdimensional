@@ -20,6 +20,8 @@ export default function LoginForm({ onSuccess }) {
       if (!response.ok) throw new Error(data.error || 'Erro ao logar');
   localStorage.setItem('token', data.token);
   localStorage.setItem('user', JSON.stringify(data.user));
+  // dispatch event global para notificar que o usuário logou
+  try { window.dispatchEvent(new CustomEvent('user:login', { detail: data.user })); } catch(e){}
   if (onSuccess) onSuccess();
     } catch (err) {
       setError(err.message);
