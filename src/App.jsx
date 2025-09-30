@@ -51,7 +51,22 @@ function App() {
 
   // escuta eventos de login/logout para atualizar o estado do usuário em tempo real
   useEffect(() => {
-    const onLogin = (e) => {
+    const onLogin = async (e) => {
+      // tenta validar o token no servidor para obter dados atualizados (incl. isAdmin)
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await fetch('http://localhost:5000/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+          if (res.ok) {
+            const data = await res.json();
+            localStorage.setItem('user', JSON.stringify(data));
+            setUser(data);
+            return;
+          }
+        } catch (err) {
+          // ignora e usa fallback
+        }
+      }
       try {
         const u = e?.detail || JSON.parse(localStorage.getItem('user'));
         setUser(u);
