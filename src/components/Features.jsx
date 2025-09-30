@@ -45,7 +45,7 @@ const Features = () => {
                     <form onSubmit={handleRegisterSubmit} style={{marginTop: '20px'}}>
                         <input type="text" placeholder="Nome" value={registerName} onChange={e => setRegisterName(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
                         <input type="email" placeholder="Email" value={registerEmail} onChange={e => setRegisterEmail(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
-                        <input type="password" placeholder="Senha" value={registerPassword} onChange={e => setRegisterPassword(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
+                                                                                                                        <input type="password" placeholder="Senha" value={registerPassword} onChange={e => setRegisterPassword(e.target.value)} required style={{width: '90%', padding: '10px', marginBottom: '10px'}}/>
                         <button type="submit" className="btn">Cadastrar</button>
                         {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
                     </form>

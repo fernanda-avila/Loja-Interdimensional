@@ -17,30 +17,22 @@ export default function LoginForm({ onSuccess }) {
         body: JSON.stringify({ email, password })
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Erro ao logar');
-  localStorage.setItem('token', data.token);
-  localStorage.setItem('user', JSON.stringify(data.user));
-  // dispatch event global para notificar que o usuário logou
-  try { window.dispatchEvent(new CustomEvent('user:login', { detail: data.user })); } catch(e){}
-  if (onSuccess) onSuccess();
+      if (!response.ok) {
+        alert(data.error || 'Erro ao logar');
+        throw new Error(data.error || 'Erro ao logar');
+      }
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('isAdmin', data.user.isAdmin ? "true" : "false");
+      alert('Login realizado com sucesso!');
+      if (onSuccess) onSuccess();
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1.5rem',
-        padding: '2.5rem 2rem',
-        borderRadius: '18px',
-        maxWidth: '400px',
-        margin: '2rem',
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <label style={{ fontWeight: 'bold', color: '#7fff00', fontSize: '1.1rem', marginBottom: '0.5rem' }}>
         Email
         <div style={{ position: 'relative' }}>
@@ -50,7 +42,7 @@ export default function LoginForm({ onSuccess }) {
             onChange={e => setEmail(e.target.value)}
             required
             style={{
-              width: '100%',
+              width: '80%',
               padding: '0.9rem 1.2rem 0.9rem 2.5rem',
               borderRadius: '10px',
               border: '2px solid #7fff00',
@@ -92,7 +84,7 @@ export default function LoginForm({ onSuccess }) {
             onChange={e => setPassword(e.target.value)}
             required
             style={{
-              width: '100%',
+              width: '80%',
               padding: '0.9rem 1.2rem 0.9rem 2.5rem',
               borderRadius: '10px',
               border: '2px solid #7fff00',
