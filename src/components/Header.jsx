@@ -85,6 +85,14 @@ const Header = () => {
     document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    try { window.dispatchEvent(new Event('user:logout')); } catch(e){}
+    // força atualização do carrinho e estado
+    fetchCart();
+  };
+
   return (
     <>
       <header className={styles.header} style={{ backgroundImage: `url(${heroBanner})` }}>
@@ -103,6 +111,7 @@ const Header = () => {
             <div>
               <button onClick={handleExplore} className="btn">Explorar Produtos</button>
               <button onClick={() => setShowLoginModal(true)} className={`btn ${styles.portalBtn}`}>Entrar no Portal</button>
+              <button onClick={handleLogout} className="btn" style={{ marginLeft: '0.5rem' }}>Sair</button>
             </div>
           </div>
         </div>
