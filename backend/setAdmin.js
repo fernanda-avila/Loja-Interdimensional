@@ -7,7 +7,7 @@ const EMAILS = ['erickramos@gmail.com', 'avilafernandaa@gmail.com', 'teteusws2@g
 
 async function setAdmin() {
   await mongoose.connect(process.env.MONGO_URI);
-  const user = await User.findOne({ email: EMAIL });
+  const user = await User.findOne({ email: EMAILS });
   if (!user) {
     console.log('Usuário não encontrado');
     return;
