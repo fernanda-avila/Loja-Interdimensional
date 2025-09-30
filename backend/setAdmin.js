@@ -3,7 +3,7 @@ import User from './models/User.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const EMAILS = ['erickramos@gmail.com', 'avilafernandaa@gmail.com', 'teteusws2@gmail.com'];
+const EMAILS = ['erickramos@gmail.com', 'avilafernandaa@gmail.com', 'teteus2@gmail.com'];
 
 async function setAdmin() {
   await mongoose.connect(process.env.MONGO_URI);
